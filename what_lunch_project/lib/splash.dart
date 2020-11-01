@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'tools.dart';
+import 'Utils/tools.dart';
 import 'dart:async';
 
 class Splash extends StatefulWidget {
@@ -11,7 +11,7 @@ class _SplashState extends State<Splash> {
   Timer _timer;
 
   _SplashState() {
-    _timer = new Timer(const Duration(milliseconds: 7650), () {
+    _timer = new Timer(const Duration(milliseconds: 7500), () {
       setState(() {
         Tools().onOpenLogin(context);
       });
