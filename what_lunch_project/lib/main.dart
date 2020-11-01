@@ -3,4 +3,4 @@ import 'splash.dart';
 import 'tools.dart';
 void main() {
   runApp(Tools().initMaterialApp(Splash()));
-}
+}l
