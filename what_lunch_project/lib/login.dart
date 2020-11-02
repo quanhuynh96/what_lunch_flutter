@@ -28,15 +28,18 @@ class UserField extends StatefulWidget {
 }
 
 class _UserField extends State<UserField> {
+  TextEditingController userController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Label().initLabel(context, "User Name:"),
-        InputField("Enter user name", false),
+        InputField("Enter user name", false, userController),
         Label().initLabel(context, "Password:"),
-        InputField("Enter password", true),
-        ButtonLogin()
+        InputField("Enter password", true, passwordController),
+        ButtonLogin(userController.value.toString(), passwordController.value.toString())
       ],
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,10 +61,15 @@ class Label {
 class _InputField extends State<InputField> {
   String content;
   bool isPassword;
+  TextEditingController controller;
 
-  _InputField(String content, bool isPassword) {
+  _InputField(
+      String content,
+      bool isPassword,
+      TextEditingController userController) {
     this.content = content;
     this.isPassword = isPassword;
+    this.controller = controller;
   }
 
   @override
@@ -69,8 +77,9 @@ class _InputField extends State<InputField> {
       margin: ToolsUtils.space(40, 0, 40, 10),
       padding: ToolsUtils.space(10, 0, 10, 0),
       child: TextField(
-        obscureText: isPassword,
-        decoration: StyleUtils.bgInputText(content),
+        controller: this.controller,
+        obscureText: this.isPassword,
+        decoration: StyleUtils.bgInputText(this.content),
       ),
       decoration: StyleUtils.bgInputField);
 }
@@ -78,26 +87,38 @@ class _InputField extends State<InputField> {
 class InputField extends StatefulWidget {
   String content;
   bool isPassword;
+  TextEditingController controller;
 
-  InputField(String content, bool isPassword) {
+  InputField(
+      String content,
+      bool isPassword,
+      TextEditingController controller) {
     this.content = content;
     this.isPassword = isPassword;
+    this.controller = controller;
   }
 
   @override
-  State<StatefulWidget> createState() => _InputField(content, isPassword);
+  State<StatefulWidget> createState() => _InputField(content, isPassword, controller);
 }
 
 class ButtonLogin extends StatelessWidget {
+  String user;
+  String password;
+  ButtonLogin(String user, String password){
+    this.user = user;
+    this.password = password;
+  }
   @override
   Widget build(BuildContext context) => Container(
-    margin: ToolsUtils.spaceTop(20),
+        margin: ToolsUtils.spaceTop(20),
         alignment: Alignment.center,
         child: FlatButton(
           color: ColorUtils.buttonBackground,
           textColor: ColorUtils.buttonTextColor,
           onPressed: () {
             // Respond to button press
+            print("User: ${this.user} - Password: ${this.password}");
           },
           shape: StadiumBorder(),
           child: Text(
