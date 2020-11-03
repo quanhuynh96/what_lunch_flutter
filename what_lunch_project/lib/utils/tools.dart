@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../login.dart';
+import 'package:what_lunch_project/ui/login.dart';
 
 class Tools {
   MaterialApp initMaterialApp(StatefulWidget nameScreen) {

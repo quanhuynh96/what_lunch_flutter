@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Utils/tools.dart';
+import 'package:what_lunch_project/Utils/tools.dart';
 import 'dart:async';
 
 class Splash extends StatefulWidget {

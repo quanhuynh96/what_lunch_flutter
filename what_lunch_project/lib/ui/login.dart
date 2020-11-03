@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:what_lunch_project/model/baseresponse.dart';
+import 'package:what_lunch_project/model/user.dart';
 import 'package:what_lunch_project/utils/tools.dart';
-import 'utils/style.dart';
-import 'utils/color.dart';
+import 'package:what_lunch_project/utils/style.dart';
+import 'package:what_lunch_project/utils/color.dart';
+import 'package:what_lunch_project/usecase/userusecase.dart';
+import 'package:what_lunch_project/utils/userctrl.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -39,11 +43,19 @@ class _UserField extends State<UserField> {
         InputField("Enter user name", false, userController),
         Label().initLabel(context, "Password:"),
         InputField("Enter password", true, passwordController),
-        ButtonLogin(userController.value.toString(), passwordController.value.toString())
+        ButtonLogin(userController.text, passwordController.text)
       ],
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    userController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }
 
@@ -66,7 +78,7 @@ class _InputField extends State<InputField> {
   _InputField(
       String content,
       bool isPassword,
-      TextEditingController userController) {
+      TextEditingController controller) {
     this.content = content;
     this.isPassword = isPassword;
     this.controller = controller;
@@ -116,9 +128,13 @@ class ButtonLogin extends StatelessWidget {
         child: FlatButton(
           color: ColorUtils.buttonBackground,
           textColor: ColorUtils.buttonTextColor,
-          onPressed: () {
+          onPressed: () async {
             // Respond to button press
             print("User: ${this.user} - Password: ${this.password}");
+            LoginUser().onLogin(this.user, this.password).then((value) =>
+                //UserCtrl.saveUser(value.data.data)
+              print(value.toString())
+            );
           },
           shape: StadiumBorder(),
           child: Text(
