@@ -17,7 +17,7 @@ class _ApiClient implements ApiClient {
   String baseUrl;
 
   @override
-  Future<BaseModel<UserDTO>> onLogin(user) async {
+  Future<BaseModel> onLogin(user) async {
     ArgumentError.checkNotNull(user, 'user');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -32,7 +32,7 @@ class _ApiClient implements ApiClient {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = BaseModel<UserDTO>.fromJson(_result.data);
+    final value = BaseModel.fromJson(_result.data);
     return value;
   }
 }

@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:what_lunch_project/ui/home.dart';
 import 'package:what_lunch_project/ui/login.dart';
 
-class Tools {
-  MaterialApp initMaterialApp(StatefulWidget nameScreen) {
+abstract class Tools {
+  static MaterialApp initMaterialApp(StatefulWidget nameScreen) {
     return MaterialApp(
       home: nameScreen,
       debugShowCheckedModeBanner: false,
     );
   }
 
-  void onOpenLogin(BuildContext context) {
+  static void onOpenLogin(BuildContext context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (BuildContext context) => initMaterialApp(Login())));
+  }
+
+  static void onOpenHome(BuildContext context) {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (BuildContext context) => initMaterialApp(Home())));
   }
 }
 

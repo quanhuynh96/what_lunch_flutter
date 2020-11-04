@@ -1,13 +1,15 @@
-class BaseModel<T> {
+import 'package:what_lunch_project/model/user.dart';
+
+class BaseModel {
   int code;
-  T data;
+  UserDTO data;
 
   BaseModel({this.code, this.data});
 
   factory BaseModel.fromJson(Map<String, dynamic> json){
     return BaseModel(
         code: json["code"],
-        data: json["data"]
+        data: UserDTO.fromJson(json['data'])
     );
   }
 

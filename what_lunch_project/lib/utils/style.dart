@@ -9,6 +9,8 @@ abstract class StyleUtils {
       TextStyle(color: ColorUtils.textHintColor, fontWeight: FontWeight.normal);
   static const TextStyle textInputStyle =
       TextStyle(color: ColorUtils.textColor, fontWeight: FontWeight.normal);
+  static const TextStyle textMenuStyle =
+      TextStyle(color: ColorUtils.textHomeColor, fontWeight: FontWeight.bold, fontSize: 25);
 
   //
   static Decoration bgInputField = BoxDecoration(

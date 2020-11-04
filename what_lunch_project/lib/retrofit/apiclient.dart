@@ -13,5 +13,5 @@ abstract class ApiClient {
   }
 
   @POST("/user/login")
-  Future<BaseModel<UserDTO>> onLogin(@Body() UserRequest user);
+  Future<BaseModel> onLogin(@Body() UserRequest user);
 }

@@ -1,10 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:what_lunch_project/model/baseresponse.dart';
 import 'package:what_lunch_project/model/user.dart';
-import 'package:what_lunch_project/utils/tools.dart';
-import 'package:what_lunch_project/utils/style.dart';
-import 'package:what_lunch_project/utils/color.dart';
 import 'package:what_lunch_project/usecase/userusecase.dart';
+import 'package:what_lunch_project/utils/color.dart';
+import 'package:what_lunch_project/utils/style.dart';
+import 'package:what_lunch_project/utils/tools.dart';
 import 'package:what_lunch_project/utils/userctrl.dart';
 
 class Login extends StatefulWidget {
@@ -43,7 +44,7 @@ class _UserField extends State<UserField> {
         InputField("Enter user name", false, userController),
         Label().initLabel(context, "Password:"),
         InputField("Enter password", true, passwordController),
-        ButtonLogin(userController.text, passwordController.text)
+        ButtonLogin(userController, passwordController)
       ],
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +63,7 @@ class _UserField extends State<UserField> {
 class Label {
   Widget initLabel(BuildContext context, String content) {
     return Container(
-        margin: const EdgeInsets.fromLTRB(40, 0, 40, 5),
+        margin: const EdgeInsets.fromLTRB(40, 0, 0, 5),
         child: Text(
           content,
           style: StyleUtils.textLabelStyle,
@@ -76,9 +77,7 @@ class _InputField extends State<InputField> {
   TextEditingController controller;
 
   _InputField(
-      String content,
-      bool isPassword,
-      TextEditingController controller) {
+      String content, bool isPassword, TextEditingController controller) {
     this.content = content;
     this.isPassword = isPassword;
     this.controller = controller;
@@ -102,25 +101,26 @@ class InputField extends StatefulWidget {
   TextEditingController controller;
 
   InputField(
-      String content,
-      bool isPassword,
-      TextEditingController controller) {
+      String content, bool isPassword, TextEditingController controller) {
     this.content = content;
     this.isPassword = isPassword;
     this.controller = controller;
   }
 
   @override
-  State<StatefulWidget> createState() => _InputField(content, isPassword, controller);
+  State<StatefulWidget> createState() =>
+      _InputField(content, isPassword, controller);
 }
 
 class ButtonLogin extends StatelessWidget {
-  String user;
-  String password;
-  ButtonLogin(String user, String password){
+  TextEditingController user;
+  TextEditingController password;
+
+  ButtonLogin(TextEditingController user, TextEditingController password) {
     this.user = user;
     this.password = password;
   }
+
   @override
   Widget build(BuildContext context) => Container(
         margin: ToolsUtils.spaceTop(20),
@@ -131,9 +131,8 @@ class ButtonLogin extends StatelessWidget {
           onPressed: () async {
             // Respond to button press
             print("User: ${this.user} - Password: ${this.password}");
-            LoginUser().onLogin(this.user, this.password).then((value) =>
-                //UserCtrl.saveUser(value.data.data)
-              print(value.toString())
+            LoginUser().onLogin(this.user.text, this.password.text).then((value) =>
+                handleLoginSuccess(context, value.data.data)
             );
           },
           shape: StadiumBorder(),
@@ -142,4 +141,10 @@ class ButtonLogin extends StatelessWidget {
           ),
         ),
       );
+
+  void handleLoginSuccess(BuildContext context, UserDTO user){
+    UserCtrl.saveUser(user);
+    print(jsonEncode(user));
+    Tools.onOpenHome(context);
+  }
 }

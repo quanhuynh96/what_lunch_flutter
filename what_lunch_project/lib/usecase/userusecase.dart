@@ -14,8 +14,8 @@ class LoginUser {
     apiClient = new ApiClient(dio);
   }
 
-  Future<BaseResponse<BaseModel<UserDTO>>> onLogin(String userName, String password) async {
-    BaseModel<UserDTO> response;
+  Future<BaseResponse<BaseModel>> onLogin(String userName, String password) async {
+    BaseModel response;
     try {
       response = await apiClient.onLogin(UserRequest(userName: userName, password: password));
       print("Response: ${response.code}");
