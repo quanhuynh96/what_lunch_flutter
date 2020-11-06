@@ -130,7 +130,7 @@ class ButtonLogin extends StatelessWidget {
           textColor: ColorUtils.buttonTextColor,
           onPressed: () async {
             // Respond to button press
-            print("User: ${this.user} - Password: ${this.password}");
+            print("User: ${this.user.text} - Password: ${this.password.text}");
             LoginUser().onLogin(this.user.text, this.password.text).then((value) =>
                 handleLoginSuccess(context, value.data.data)
             );

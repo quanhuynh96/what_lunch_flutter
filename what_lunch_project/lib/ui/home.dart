@@ -12,6 +12,7 @@ class _Home extends State<Home> {
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'Welcome to Flutter',
+    debugShowCheckedModeBanner: false,
     home: Container(
       decoration: BoxDecoration(
           image: DecorationImage(
