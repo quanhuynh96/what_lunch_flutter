@@ -11,7 +11,7 @@ class _SplashState extends State<Splash> {
   Timer _timer;
 
   _SplashState() {
-    _timer = new Timer(const Duration(milliseconds: 7500), () {
+    _timer = new Timer(const Duration(milliseconds: 5000), () {
       setState(() {
         Tools.onOpenLogin(context);
       });
@@ -29,7 +29,7 @@ class _SplashState extends State<Splash> {
     return DecoratedBox(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/splash_screen.gif'),
+              image: AssetImage('assets/images/splash_background.gif'),
               fit: BoxFit.fill)),
     );
   }
