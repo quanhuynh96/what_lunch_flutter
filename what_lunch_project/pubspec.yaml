@@ -39,14 +39,24 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
+
   flutter_test:
     sdk: flutter
 
-  #import retrofit
+  # Import lib icon app
+  flutter_launcher_icons: "^0.8.0"
+
+  # Import retrofit
   retrofit_generator: any
   build_runner: any
-  #automatic serialization
+  # Automatic serialization
   json_serializable: any
+
+# Set Icon launcher
+flutter_icons:
+  image_path: "assets/icons/fast_food.png"
+  android: true
+  ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -56,6 +66,7 @@ flutter:
   # init assets folder
   assets:
     - assets/images/
+    - assets/icons/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

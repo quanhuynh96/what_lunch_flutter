@@ -10,19 +10,21 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> {
   @override
-  Widget build(BuildContext context) => MaterialApp(
-    title: 'Welcome to Flutter',
-    debugShowCheckedModeBanner: false,
-    home: Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/background_home.jpg"), fit: BoxFit.cover)),
-      child: Container(
-        alignment: Alignment.centerRight,
-        child: MenuHome(),
-      ),
-    ),
-  );
+  Widget build(BuildContext context) =>
+      MaterialApp(
+        title: 'Welcome to Flutter',
+        debugShowCheckedModeBanner: false,
+        home: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/background_home.jpg"),
+                  fit: BoxFit.cover)),
+          child: Container(
+            alignment: Alignment.centerRight,
+            child: MenuHome(),
+          ),
+        ),
+      );
 }
 
 class MenuHome extends StatefulWidget {
@@ -32,7 +34,8 @@ class MenuHome extends StatefulWidget {
 
 class _MenuHome extends State<MenuHome> {
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext context) =>
+      Column(
         children: [TextMenu("Restaurant"), TextMenu("Food"), TextMenu("Menu")],
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -47,13 +50,15 @@ class TextMenu extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => Container(
-      margin: const EdgeInsets.fromLTRB(0, 0, 40, 20),
-      child: GestureDetector(
-        onTap: (){
-          print("Tapped");
-        },
-        child: Text(this.label,
-          style: StyleUtils.textMenuStyle,),
-      ));
+  Widget build(BuildContext context) =>
+      Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 40, 20),
+          child: GestureDetector(
+            excludeFromSemantics: false,
+            onTap: () {
+              print("Tapped");
+            },
+            child: Text(this.label,
+              style: StyleUtils.textMenuStyle,),
+          ));
 }
